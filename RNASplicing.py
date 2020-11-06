@@ -22,8 +22,9 @@ def translate(seq):
     
     protein = ""
     for i in seq:
-        aa = codontable[i]
-        protein += aa
+        if len(i) == 3:
+            aa = codontable[i]
+            protein += aa
     return (protein)
 
 
