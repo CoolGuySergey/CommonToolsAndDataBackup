@@ -10,28 +10,25 @@ df = pd.DataFrame(
              "Unpartitioned",
     ],
     data=[
-        ['B0S0A0', 28, 0, 919, 2815],
-        ['B0S1A0', 37, 0, 272, 495],
-        ['B0S0A1', 49210, 13640, 70333, 76555],
-        ['B0S1A1', 1227, 298, 1220, 1946],
-        ['B1S0A0', 0, 0, 0, 0],
-        ['B1S1A0', 4, 0, 18, 19],
-        ['B1S0A1', 3710, 2875, 3256, 2260],
-        ['B1S1A1', 69422, 106815, 47620, 39550],
+        ['Marginal and Internal Symmetries breaking Global Symmetry', 28, 0, 919, 2815],
+        ['Internal Symmetry breaking Global Symmetry', 37, 0, 272, 495],
+        ['Marginal Symmetry breaking Global Symmetry', 49210, 13640, 70333, 76555],
+        ['Marginal, Internal, Global Symmetries maintained', 69422, 106815, 47620, 39550],
     ]
 )
 
-#sns.set()
-#df.set_index("Behaviour Tally").T.plot(kind="bar", stacked=True)
-#plt.show()
-
 from matplotlib.colors import ListedColormap
 
-df.set_index("Behaviour Tally")\
-  .reindex(df.set_index("Behaviour Tally").sum().sort_values().index, axis=1)\
+ax = df.set_index("Behaviour Tally")\
+  .reindex(df.set_index("Behaviour Tally").sum().index, axis=1)\
   .T.plot(kind='bar',
           stacked=True,
-          colormap=ListedColormap(sns.color_palette("GnBu", 8)), 
-          figsize=(12,6))
+          colormap=ListedColormap(sns.color_palette("hls", 4))
+  )
 
+# Put the legend out of the figure
+plt.legend(bbox_to_anchor=(0, 1, 1, 0.2),
+           loc="lower left", borderaxespad=0.)
+# Turn tick labels
+plt.setp(ax.get_xticklabels(), rotation=0)
 plt.show()
